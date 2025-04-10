@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </title>نظام النتائج </title>
+  <link rel="icon" type="image/jpeg" href="logo.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            font-family: 'Cairo', sans-serif;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            background: #f8f9fa;
+            min-height: 100vh;
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .a4-container {
+            width: 100%;
+            max-width: 21cm;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 1.5rem;
+            overflow: hidden;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            border-radius: 1rem;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header h2 {
+            font-size: 1.4rem;
+            font-weight: 400;
+            color: #bdc3c7;
+        }
+
+        .info-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .input-group label {
+            font-size: 0.95rem;
+            color: #2c3e50;
+            padding-right: 0.5rem;
+            font-weight: 600;
+        }
+
+        .info-input {
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 0.8rem;
+            font-size: 1rem;
+            width: 100%;
+            background: #f8f9fa;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 2rem 0;
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            padding: 1.2rem;
+            text-align: center;
+            border: 1px solid #f0f0f0;
+            min-width: 130px;
+        }
+
+        th {
+            background-color: #2c3e50;
+            color: white;
+            font-weight: 700;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .coefficient-input, .grade-input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 0.7rem;
+            font-size: 1rem;
+            text-align: center;
+            background: white;
+            font-weight: 600;
+        }
+
+        .results-footer {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .result-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1));
+            transform: rotate(45deg);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-50%) rotate(45deg); }
+            100% { transform: translateX(50%) rotate(45deg); }
+        }
+
+        .result-icon {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #3498db;
+        }
+
+        .result-label {
+            font-size: 0.95rem;
+            color: #bdc3c7;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .division-card {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+        }
+
+        #division {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            width: 100%;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .credit-footer {
+            text-align: center;
+            margin: 2rem 0 0;
+            padding: 1.5rem 0 0;
+            color: #666;
+            font-size: 0.9rem;
+            border-top: 1px solid #eee;
+        }
+
+        .credit-footer a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 600;
+        }
+
+        .credit-footer a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .results-footer {
+                grid-template-columns: 1fr;
+            }
+            
+            .result-card {
+                padding: 1.2rem;
+            }
+            
+            .result-value {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .a4-container {
+                box-shadow: none;
+                border-radius: 0;
+                padding: 0;
+            }
+            .result-card::before {
+                display: none;
+            }
+            .credit-footer {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: white;
+                padding: 0.5rem;
+                border-top: 2px solid #ddd;
+                color: #444;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="a4-container">
+        <div class="header">
+            <h1>6c Elmenhel 2</h1>
+            <h2>نظام احتساب النتائج</h2>
+        </div>
+
+        <div class="content">
+            <div class="info-section">
+                <div class="input-group">
+                    <label for="studentName">اسم الطالب:</label>
+                    <input type="text" class="info-input" id="studentName">
+                </div>
+                <div class="input-group">
+                    <label for="studentNumber">الرقم :</label>
+                    <input type="text" class="info-input" id="studentNumber">
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>المادة الدراسية</th>
+                        <th>المعامل</th>
+                        <th>الدرجة</th>
+                    </tr>
+                    <tr>
+                        <td>اللغة العربية</td>
+                        <td><input type="number" class="coefficient-input" value="2" data-subject="arabic"></td>
+                        <td><input type="number" class="grade-input" data-subject="arabic"></td>
+                    </tr>
+                    <tr>
+                        <td>التاريخ</td>
+                        <td><input type="number" class="coefficient-input" value="2" data-subject="history"></td>
+                        <td><input type="number" class="grade-input" data-subject="history"></td>
+                    </tr>
+                    <tr>
+                        <td>التربية الإسلامية</td>
+                        <td><input type="number" class="coefficient-input" value="2" data-subject="islamic"></td>
+                        <td><input type="number" class="grade-input" data-subject="islamic"></td>
+                    </tr>
+                    <tr>
+                        <td>التربية المدنية</td>
+                        <td><input type="number" class="coefficient-input" value="2" data-subject="civics"></td>
+                        <td><input type="number" class="grade-input" data-subject="civics"></td>
+                    </tr>
+                    <tr>
+                        <td>الفلسفة</td>
+                        <td><input type="number" class="coefficient-input" value="2" data-subject="philosophy"></td>
+                        <td><input type="number" class="grade-input" data-subject="philosophy"></td>
+                    </tr>
+                    <tr>
+                        <td>الرياضيات</td>
+                        <td><input type="number" class="coefficient-input" value="7" data-subject="math"></td>
+                        <td><input type="number" class="grade-input" data-subject="math"></td>
+                    </tr>
+                    <tr>
+                        <td>الفيزياء</td>
+                        <td><input type="number" class="coefficient-input" value="6" data-subject="physics"></td>
+                        <td><input type="number" class="grade-input" data-subject="physics"></td>
+                    </tr>
+                    <tr>
+                        <td>العلوم</td>
+                        <td><input type="number" class="coefficient-input" value="3" data-subject="science"></td>
+                        <td><input type="number" class="grade-input" data-subject="science"></td>
+                    </tr>
+                    <tr>
+                        <td>الإنجليزية</td>
+                        <td><input type="number" class="coefficient-input" value="2" data-subject="english"></td>
+                        <td><input type="number" class="grade-input" data-subject="english"></td>
+                    </tr>
+                    <tr>
+                        <td>الفرنسية</td>
+                        <td><input type="number" class="coefficient-input" value="2" data-subject="french"></td>
+                        <td><input type="number" class="grade-input" data-subject="french"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="results-footer">
+                <div class="result-card">
+                    <i class="fas fa-calculator result-icon"></i>
+                    <div class="result-label">المجموع الكلي</div>
+                    <div class="result-value" id="total">0.00</div>
+                </div>
+                
+                <div class="result-card">
+                    <i class="fas fa-chart-line result-icon"></i>
+                    <div class="result-label">المعدل العام</div>
+                    <div class="result-value" id="average">0.00</div>
+                </div>
+                
+                <div class="result-card division-card">
+                    <i class="fas fa-divide result-icon"></i>
+                    <div class="result-label">قيمة التقسيم</div>
+                    <input type="number" id="division" value="30" class="result-value">
+                </div>
+            </div>
+
+            <div class="credit-footer">
+                نظام إلكتروني لاحتساب انتائج <br>تصميم وتطوير: 
+              Ahmedal Ahmedbedi
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function saveData() {
+            const data = {
+                name: document.getElementById('studentName').value,
+                number: document.getElementById('studentNumber').value,
+                division: document.getElementById('division').value,
+                coefficients: {},
+                grades: {}
+            };
+
+            document.querySelectorAll('.coefficient-input').forEach(input => {
+                data.coefficients[input.dataset.subject] = input.value;
+            });
+
+            document.querySelectorAll('.grade-input').forEach(input => {
+                data.grades[input.dataset.subject] = input.value;
+            });
+
+            localStorage.setItem('studentResults', JSON.stringify(data));
+        }
+
+        function loadData() {
+            const savedData = JSON.parse(localStorage.getItem('studentResults'));
+            if (!savedData) return;
+
+            document.getElementById('studentName').value = savedData.name || '';
+            document.getElementById('studentNumber').value = savedData.number || '';
+            document.getElementById('division').value = savedData.division || '30';
+
+            Object.entries(savedData.coefficients || {}).forEach(([subject, value]) => {
+                const input = document.querySelector(`.coefficient-input[data-subject="${subject}"]`);
+                if (input) input.value = value;
+            });
+
+            Object.entries(savedData.grades || {}).forEach(([subject, value]) => {
+                const input = document.querySelector(`.grade-input[data-subject="${subject}"]`);
+                if (input) input.value = value;
+            });
+
+            calculateResults();
+        }
+
+        function calculateResults() {
+            let total = 0;
+            document.querySelectorAll('.coefficient-input').forEach((coefInput, index) => {
+                const gradeInput = document.querySelectorAll('.grade-input')[index];
+                total += (parseFloat(coefInput.value) || 0) * (parseFloat(gradeInput.value) || 0);
+            });
+
+            const division = parseFloat(document.getElementById('division').value) || 30;
+            const average = total / division;
+
+            document.getElementById('total').textContent = total.toFixed(2);
+            document.getElementById('average').textContent = average.toFixed(2);
+
+            saveData();
+        }
+
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', calculateResults);
+        });
+
+        window.addEventListener('load', () => {
+            loadData();
+            calculateResults();
+        });
+
+        window.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+                e.preventDefault();
+                window.print();
+            }
+        });
+    </script>
+</body>
+</html>
