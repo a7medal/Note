@@ -189,14 +189,24 @@
             color: var(--primary-color);
         }
 
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
         .add-test-btn, .remove-test-btn {
-            padding: 0.5rem 1rem;
-            margin: 0.5rem;
+            padding: 0.5rem;
             border: none;
             border-radius: 0.5rem;
             cursor: pointer;
             font-weight: 600;
             transition: background-color 0.3s ease, transform 0.2s ease;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .add-test-btn {
@@ -282,8 +292,7 @@
             border: 2px solid rgba(255,255,255,0.2);
             color: white;
             font-size: 1.8rem;
-            width: 100%;
-            text-align: center;
+            width: 100 text-align: center;
             font-weight: 700;
             border-radius: 0.6rem;
             padding: 0.5rem;
@@ -381,17 +390,13 @@
                 </div>
             </div>
 
-            <button class="add-test-btn" onclick="addTestColumn()">إضافة اختبار</button>
-            <button class="remove-test-btn" onclick="removeTestColumn()">إزالة اختبار</button>
-
             <div class="table-container">
                 <table id="resultsTable">
                     <thead>
                         <tr>
                             <th>المادة الدراسية</th>
                             <th>المعامل</th>
-                            <th>اختبار 1</th>
-                            <th>اختبار 2</th>
+                            <th>الاختبارات</th>
                             <th>امتحان 1</th>
                             <th>امتحان 2</th>
                             <th>امتحان 3</th>
@@ -403,8 +408,14 @@
                         <tr>
                             <td>اللغة العربية</td>
                             <td><input type="number" class="coefficient-input" value="2" data-subject="arabic"></td>
-                            <td><input type="number" class="grade-input" data-subject="arabic" data-type="test1"></td>
-                            <td><input type="number" class="grade-input" data-subject="arabic" data-type="test2"></td>
+                            <td class="tests-cell" data-subject="arabic">
+                                <input type="number" class="grade-input" data-subject="arabic" data-type="test1">
+                                <input type="number" class="grade-input" data-subject="arabic" data-type="test2">
+                                <div class="action-buttons">
+                                    <button class="add-test-btn" onclick="addTest('arabic')"><i class="fas fa-plus"></i></button>
+                                    <button class="remove-test-btn" onclick="removeTest('arabic')"><i class="fas fa-minus"></i></button>
+                                </div>
+                            </td>
                             <td><input type="number" class="grade-input" data-subject="arabic" data-type="exam1"></td>
                             <td><input type="number" class="grade-input" data-subject="arabic" data-type="exam2"></td>
                             <td><input type="number" class="grade-input" data-subject="arabic" data-type="exam3"></td>
@@ -414,8 +425,14 @@
                         <tr>
                             <td>التاريخ</td>
                             <td><input type="number" class="coefficient-input" value="2" data-subject="history"></td>
-                            <td><input type="number" class="grade-input" data-subject="history" data-type="test1"></td>
-                            <td><input type="number" class="grade-input" data-subject="history" data-type="test2"></td>
+                            <td class="tests-cell" data-subject="history">
+                                <input type="number" class="grade-input" data-subject="history" data-type="test1">
+                                <input type="number" class="grade-input" data-subject="history" data-type="test2">
+                                <div class="action-buttons">
+                                    <button class="add-test-btn" onclick="addTest('history')"><i class="fas fa-plus"></i></button>
+                                    <button class="remove-test-btn" onclick="removeTest('history')"><i class="fas fa-minus"></i></button>
+                                </div>
+                            </td>
                             <td><input type="number" class="grade-input" data-subject="history" data-type="exam1"></td>
                             <td><input type="number" class="grade-input" data-subject="history" data-type="exam2"></td>
                             <td><input type="number" class="grade-input" data-subject="history" data-type="exam3"></td>
@@ -425,8 +442,14 @@
                         <tr>
                             <td>التربية الإسلامية</td>
                             <td><input type="number" class="coefficient-input" value="2" data-subject="islamic"></td>
-                            <td><input type="number" class="grade-input" data-subject="islamic" data-type="test1"></td>
-                            <td><input type="number" class="grade-input" data-subject="islamic" data-type="test2"></td>
+                            <td class="tests-cell" data-subject="islamic">
+                                <input type="number" class="grade-input" data-subject="islamic" data-type="test1">
+                                <input type="number" class="grade-input" data-subject="islamic" data-type="test2">
+                                <div class="action-buttons">
+                                    <button class="add-test-btn" onclick="addTest('islamic')"><i class="fas fa-plus"></i></button>
+                                    <button class="remove-test-btn" onclick="removeTest('islamic')"><i class="fas fa-minus"></i></button>
+                                </div>
+                            </td>
                             <td><input type="number" class="grade-input" data-subject="islamic" data-type="exam1"></td>
                             <td><input type="number" class="grade-input" data-subject="islamic" data-type="exam2"></td>
                             <td><input type="number" class="grade-input" data-subject="islamic" data-type="exam3"></td>
@@ -436,8 +459,14 @@
                         <tr>
                             <td>التربية المدنية</td>
                             <td><input type="number" class="coefficient-input" value="2" data-subject="civics"></td>
-                            <td><input type="number" class="grade-input" data-subject="civics" data-type="test1"></td>
-                            <td><input type="number" class="grade-input" data-subject="civics" data-type="test2"></td>
+                            <td class="tests-cell" data-subject="civics">
+                                <input type="number" class="grade-input" data-subject="civics" data-type="test1">
+                                <input type="number" class="grade-input" data-subject="civics" data-type="test2">
+                                <div class="action-buttons">
+                                    <button class="add-test-btn" onclick="addTest('civics')"><i class="fas fa-plus"></i></button>
+                                    <button class="remove-test-btn" onclick="removeTest('civics')"><i class="fas fa-minus"></i></button>
+                                </div>
+                            </td>
                             <td><input type="number" class="grade-input" data-subject="civics" data-type="exam1"></td>
                             <td><input type="number" class="grade-input" data-subject="civics" data-type="exam2"></td>
                             <td><input type="number" class="grade-input" data-subject="civics" data-type="exam3"></td>
@@ -447,8 +476,14 @@
                         <tr>
                             <td>الفلسفة</td>
                             <td><input type="number" class="coefficient-input" value="2" data-subject="philosophy"></td>
-                            <td><input type="number" class="grade-input" data-subject="philosophy" data-type="test1"></td>
-                            <td><input type="number" class="grade-input" data-subject="philosophy" data-type="test2"></td>
+                            <td class="tests-cell" data-subject="philosophy">
+                                <input type="number" class="grade-input" data-subject="philosophy" data-type="test1">
+                                <input type="number" class="grade-input" data-subject="philosophy" data-type="test2">
+                                <div class="action-buttons">
+                                    <button class="add-test-btn" onclick="addTest('philosophy')"><i class="fas fa-plus"></i></button>
+                                    <button class="remove-test-btn" onclick="removeTest('philosophy')"><i class="fas fa-minus"></i></button>
+                                </div>
+                            </td>
                             <td><input type="number" class="grade-input" data-subject="philosophy" data-type="exam1"></td>
                             <td><input type="number" class="grade-input" data-subject="philosophy" data-type="exam2"></td>
                             <td><input type="number" class="grade-input" data-subject="philosophy" data-type="exam3"></td>
@@ -458,8 +493,14 @@
                         <tr>
                             <td>الرياضيات</td>
                             <td><input type="number" class="coefficient-input" value="7" data-subject="math"></td>
-                            <td><input type="number" class="grade-input" data-subject="math" data-type="test1"></td>
-                            <td><input type="number" class="grade-input" data-subject="math" data-type="test2"></td>
+                            <td class="tests-cell" data-subject="math">
+                                <input type="number" class="grade-input" data-subject="math" data-type="test1">
+                                <input type="number" class="grade-input" data-subject="math" data-type="test2">
+                                <div class="action-buttons">
+                                    <button class="add-test-btn" onclick="addTest('math')"><i class="fas fa-plus"></i></button>
+                                    <button class="remove-test-btn" onclick="removeTest('math')"><i class="fas fa-minus"></i></button>
+                                </div>
+                            </td>
                             <td><input type="number" class="grade-input" data-subject="math" data-type="exam1"></td>
                             <td><input type="number" class="grade-input" data-subject="math" data-type="exam2"></td>
                             <td><input type="number" class="grade-input" data-subject="math" data-type="exam3"></td>
@@ -469,8 +510,14 @@
                         <tr>
                             <td>الفيزياء</td>
                             <td><input type="number" class="coefficient-input" value="6" data-subject="physics"></td>
-                            <td><input type="number" class="grade-input" data-subject="physics" data-type="test1"></td>
-                            <td><input type="number" class="grade-input" data-subject="physics" data-type="test2"></td>
+                            <td class="tests-cell" data-subject="physics">
+                                <input type="number" class="grade-input" data-subject="physics" data-type="test1">
+                                <input type="number" class="grade-input" data-subject="physics" data-type="test2">
+                                <div class="action-buttons">
+                                    <button class="add-test-btn" onclick="addTest('physics')"><i class="fas fa-plus"></i></button>
+                                    <button class="remove-test-btn" onclick="removeTest('physics')"><i class="fas fa-minus"></i></button>
+                                </div>
+                            </td>
                             <td><input type="number" class="grade-input" data-subject="physics" data-type="exam1"></td>
                             <td><input type="number" class="grade-input" data-subject="physics" data-type="exam2"></td>
                             <td><input type="number" class="grade-input" data-subject="physics" data-type="exam3"></td>
@@ -480,8 +527,14 @@
                         <tr>
                             <td>العلوم</td>
                             <td><input type="number" class="coefficient-input" value="3" data-subject="science"></td>
-                            <td><input type="number" class="grade-input" data-subject="science" data-type="test1"></td>
-                            <td><input type="number" class="grade-input" data-subject="science" data-type="test2"></td>
+                            <td class="tests-cell" data-subject="science">
+                                <input type="number" class="grade-input" data-subject="science" data-type="test1">
+                                <input type="number" class="grade-input" data-subject="science" data-type="test2">
+                                <div class="action-buttons">
+                                    <button class="add-test-btn" onclick="addTest('science')"><i class="fas fa-plus"></i></button>
+                                    <button class="remove-test-btn" onclick="removeTest('science')"><i class="fas fa-minus"></i></button>
+                                </div>
+                            </td>
                             <td><input type="number" class="grade-input" data-subject="science" data-type="exam1"></td>
                             <td><input type="number" class="grade-input" data-subject="science" data-type="exam2"></td>
                             <td><input type="number" class="grade-input" data-subject="science" data-type="exam3"></td>
@@ -491,8 +544,14 @@
                         <tr>
                             <td>الإنجليزية</td>
                             <td><input type="number" class="coefficient-input" value="2" data-subject="english"></td>
-                            <td><input type="number" class="grade-input" data-subject="english" data-type="test1"></td>
-                            <td><input type="number" class="grade-input" data-subject="english" data-type="test2"></td>
+                            <td class="tests-cell" data-subject="english">
+                                <input type="number" class="grade-input" data-subject="english" data-type="test1">
+                                <input type="number" class="grade-input" data-subject="english" data-type="test2">
+                                <div class="action-buttons">
+                                    <button class="add-test-btn" onclick="addTest('english')"><i class="fas fa-plus"></i></button>
+                                    <button class="remove-test-btn" onclick="removeTest('english')"><i class="fas fa-minus"></i></button>
+                                </div>
+                            </td>
                             <td><input type="number" class="grade-input" data-subject="english" data-type="exam1"></td>
                             <td><input type="number" class="grade-input" data-subject="english" data-type="exam2"></td>
                             <td><input type="number" class="grade-input" data-subject="english" data-type="exam3"></td>
@@ -502,8 +561,14 @@
                         <tr>
                             <td>الفرنسية</td>
                             <td><input type="number" class="coefficient-input" value="2" data-subject="french"></td>
-                            <td><input type="number" class="grade-input" data-subject="french" data-type="test1"></td>
-                            <td><input type="number" class="grade-input" data-subject="french" data-type="test2"></td>
+                            <td class="tests-cell" data-subject="french">
+                                <input type="number" class="grade-input" data-subject="french" data-type="test1">
+                                <input type="number" class="grade-input" data-subject="french" data-type="test2">
+                                <div class="action-buttons">
+                                    <button class="add-test-btn" onclick="addTest('french')"><i class="fas fa-plus"></i></button>
+                                    <button class="remove-test-btn" onclick="removeTest('french')"><i class="fas fa-minus"></i></button>
+                                </div>
+                            </td>
                             <td><input type="number" class="grade-input" data-subject="french" data-type="exam1"></td>
                             <td><input type="number" class="grade-input" data-subject="french" data-type="exam2"></td>
                             <td><input type="number" class="grade-input" data-subject="french" data-type="exam3"></td>
@@ -542,45 +607,31 @@
     </div>
 
     <script>
-        let testCount = 2; // Initial number of test columns
+        function addTest(subject) {
+            const testsCell = document.querySelector(`.tests-cell[data-subject="${subject}"]`);
+            const testInputs = testsCell.querySelectorAll('.grade-input');
+            const testCount = testInputs.length + 1;
 
-        function addTestColumn() {
-            testCount++;
-            const table = document.getElementById('resultsTable');
-            const headerRow = table.querySelector('thead tr');
-            const newHeader = document.createElement('th');
-            newHeader.textContent = `اختبار ${testCount}`;
-            headerRow.insertBefore(newHeader, headerRow.children[headerRow.children.length - 3]); // Before exams
+            const newInput = document.createElement('input');
+            newInput.type = 'number';
+            newInput.className = 'grade-input';
+            newInput.dataset.subject = subject;
+            newInput.dataset.type = `test${testCount}`;
+            newInput.addEventListener('input', calculateResults);
 
-            const rows = table.querySelectorAll('tbody tr');
-            rows.forEach(row => {
-                const newCell = document.createElement('td');
-                const input = document.createElement('input');
-                input.type = 'number';
-                input.className = 'grade-input';
-                input.dataset.subject = row.querySelector('.coefficient-input').dataset.subject;
-                input.dataset.type = `test${testCount}`;
-                input.addEventListener('input', calculateResults);
-                newCell.appendChild(input);
-                row.insertBefore(newCell, row.children[row.children.length - 3]);
-            });
+            testsCell.insertBefore(newInput, testsCell.querySelector('.action-buttons'));
 
             calculateResults();
             saveData();
         }
 
-        function removeTestColumn() {
-            if (testCount <= 1) return; // Prevent removing all test columns
-            const table = document.getElementById('resultsTable');
-            const headerRow = table.querySelector('thead tr');
-            headerRow.removeChild(headerRow.children[2 + testCount - 1]);
+        function removeTest(subject) {
+            const testsCell = document.querySelector(`.tests-cell[data-subject="${subject}"]`);
+            const testInputs = testsCell.querySelectorAll('.grade-input');
+            if (testInputs.length <= 1) return; // Prevent removing all tests
 
-            const rows = table.querySelectorAll('tbody tr');
-            rows.forEach(row => {
-                row.removeChild(row.children[2 + testCount - 1]);
-            });
+            testsCell.removeChild(testInputs[testInputs.length - 1]);
 
-            testCount--;
             calculateResults();
             saveData();
         }
@@ -590,13 +641,19 @@
                 name: document.getElementById('studentName').value,
                 number: document.getElementById('studentNumber').value,
                 division: document.getElementById('division').value,
-                testCount: testCount,
                 coefficients: {},
-                grades: {}
+                grades: {},
+                testCounts: {}
             };
 
             document.querySelectorAll('.coefficient-input').forEach(input => {
                 data.coefficients[input.dataset.subject] = input.value;
+            });
+
+            document.querySelectorAll('.tests-cell').forEach(cell => {
+                const subject = cell.dataset.subject;
+                const testInputs = cell.querySelectorAll('.grade-input');
+                data.testCounts[subject] = testInputs.length;
             });
 
             document.querySelectorAll('.grade-input').forEach(input => {
@@ -616,18 +673,23 @@
             document.getElementById('studentName').value = savedData.name || '';
             document.getElementById('studentNumber').value = savedData.number || '';
             document.getElementById('division').value = savedData.division || '30';
-            testCount = savedData.testCount || 2;
-
-            // Rebuild test columns if needed
-            while (testCount > 2) {
-                addTestColumn();
-                testCount--;
-            }
-            testCount = savedData.testCount || 2;
 
             Object.entries(savedData.coefficients || {}).forEach(([subject, value]) => {
                 const input = document.querySelector(`.coefficient-input[data-subject="${subject}"]`);
                 if (input) input.value = value;
+            });
+
+            Object.entries(savedData.testCounts || {}).forEach(([subject, count]) => {
+                const testsCell = document.querySelector(`.tests-cell[data-subject="${subject}"]`);
+                const currentTests = testsCell.querySelectorAll('.grade-input').length;
+                while (currentTests < count) {
+                    addTest(subject);
+                    currentTests++;
+                }
+                while (currentTests > count) {
+                    removeTest(subject);
+                    currentTests--;
+                }
             });
 
             Object.entries(savedData.grades || {}).forEach(([subject, types]) => {
@@ -645,15 +707,19 @@
             const subjects = ['arabic', 'history', 'islamic', 'civics', 'philosophy', 'math', 'physics', 'science', 'english', 'french'];
 
             subjects.forEach(subject => {
+                const testsCell = document.querySelector(`.tests-cell[data-subject="${subject}"]`);
+                const testInputs = testsCell.querySelectorAll('.grade-input');
                 let testSum = 0;
                 let testCount = 0;
-                for (let i = 1; i <= testCount; i++) {
-                    const test = parseFloat(document.querySelector(`.grade-input[data-subject="${subject}"][data-type="test${i}"]`).value) || 0;
+
+                testInputs.forEach(input => {
+                    const test = parseFloat(input.value) || 0;
                     if (test > 0) {
                         testSum += test;
                         testCount++;
                     }
-                }
+                });
+
                 const exam1 = parseFloat(document.querySelector(`.grade-input[data-subject="${subject}"][data-type="exam1"]`).value) || 0;
                 const exam2 = parseFloat(document.querySelector(`.grade-input[data-subject="${subject}"][data-type="exam2"]`).value) || 0;
                 const exam3 = parseFloat(document.querySelector(`.grade-input[data-subject="${subject}"][data-type="exam3"]`).value) || 0;
