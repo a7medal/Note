@@ -5,22 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>نظام النتائج</title>
     <link rel="icon" type="image/png" href="logo.png">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#1e3a8a">
+    <meta name="theme-color" content="#0a1e3d">
     <style>
         :root {
-            --primary-color: #1e3a8a;
-            --secondary-color: #3b82f6;
-            --text-color: #1f2937;
-            --bg-color: #f8fafc;
+            --primary-color: #0a1e3d;
+            --secondary-color: #4a90e2;
+            --accent-color: #f5f5f5;
+            --background-color: #e8eff5;
             --card-bg: #ffffff;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+            --hover-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+            --border-radius: 1.2rem;
         }
 
         * {
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Tajawal', sans-serif;
             box-sizing: border-box;
             margin: 0;
             padding: 0;
@@ -28,126 +30,104 @@
         }
 
         body {
-            background: var(--bg-color);
+            background: linear-gradient(135deg, var(--background-color), #d5e2f0);
             min-height: 100vh;
-            padding: 1.5rem;
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 2rem;
         }
 
         .a4-container {
             width: 100%;
-            max-width: 22cm;
+            max-width: 24cm;
             background: var(--card-bg);
+            border-radius: var(--border-radius);
             box-shadow: var(--shadow);
-            border-radius: 1.5rem;
-            overflow: hidden;
             padding: 2.5rem;
             position: relative;
-            animation: fadeIn 0.5s ease-in;
+            overflow: hidden;
+            animation: slideIn 0.6s ease-out;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes slideIn {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .header {
-            text-align: center;
-            margin-bottom: 2.5rem;
-            padding: 2.5rem;
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
             color: white;
-            border-radius: 1rem;
             position: relative;
-            overflow: hidden;
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.15));
-            transform: rotate(45deg);
-            animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-50%) rotate(45deg); }
-            100% { transform: translateX(50%) rotate(45deg); }
+            margin-bottom: 2rem;
         }
 
         .header h1 {
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
             font-weight: 900;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         .header h2 {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             font-weight: 400;
-            color: #e5e7eb;
+            color: #d4e4ff;
+            margin-top: 0.5rem;
         }
 
         .info-section {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
             margin-bottom: 2.5rem;
         }
 
         .input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-        }
-
-        .input-group label {
-            font-size: 1rem;
-            color: var(--text-color);
-            font-weight: 600;
+            position: relative;
         }
 
         .info-input {
-            padding: 1rem;
-            border: 2px solid #e5e7eb;
+            padding: 1rem 1.5rem;
+            border: none;
             border-radius: 0.8rem;
+            background: #f7f9fb;
+            box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.05), inset -4px -4px 8px rgba(255, 255, 255, 0.9);
             font-size: 1rem;
             width: 100%;
-            background: #f8fafc;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            color: var(--text-color);
         }
 
         .info-input:focus {
             outline: none;
-            border-color: var(--secondary-color);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+        }
+
+        .info-input::placeholder {
+            color: #a0aec0;
         }
 
         .table-container {
-            overflow-x: auto;
-            margin: 2.5rem 0;
-            border-radius: 1rem;
-            box-shadow: var(--shadow);
             background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow-x: auto;
+            margin: 2rem 0;
         }
 
         table {
             width: 100%;
-            border-collapse: collapse;
-            background: var(--card-bg);
+            border-collapse: separate;
+            border-spacing: 0;
         }
 
         th, td {
             padding: 1rem;
             text-align: center;
-            border: 1px solid #e5e7eb;
-            min-width: 100px;
+            border-bottom: 1px solid #e2e8f0;
         }
 
         th {
@@ -157,31 +137,32 @@
             position: sticky;
             top: 0;
             z-index: 10;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        tr:nth-child(even) {
-            background: #f8fafc;
+        tr:last-child td {
+            border-bottom: none;
         }
 
         tr:hover {
-            background: #f1f5f9;
+            background: #f8fafc;
         }
 
         .coefficient-input, .grade-input {
-            width: 100%;
-            padding: 0.7rem;
-            border: 2px solid #e5e7eb;
+            padding: 0.6rem;
+            border: none;
             border-radius: 0.6rem;
+            background: #f7f9fb;
+            box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.05), inset -4px -4px 8px rgba(255, 255, 255, 0.9);
             font-size: 0.95rem;
             text-align: center;
-            background: white;
-            font-weight: 600;
-            transition: border-color 0.3s ease;
+            width: 80px;
         }
 
         .coefficient-input:focus, .grade-input:focus {
             outline: none;
-            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
         }
 
         .subject-average, .subject-total {
@@ -189,24 +170,31 @@
             color: var(--primary-color);
         }
 
+        .tests-cell {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem;
+        }
+
         .action-buttons {
             display: flex;
-            justify-content: center;
             gap: 0.5rem;
         }
 
         .add-test-btn, .remove-test-btn {
-            padding: 0.5rem;
+            width: 32px;
+            height: 32px;
             border: none;
-            border-radius: 0.5rem;
+            border-radius: 50%;
             cursor: pointer;
-            font-weight: 600;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            width: 30px;
-            height: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 0.9rem;
+            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1), -4px -4px 8px rgba(255, 255, 255, 0.9);
         }
 
         .add-test-btn {
@@ -215,18 +203,18 @@
         }
 
         .add-test-btn:hover {
-            background: #2563eb;
-            transform: translateY(-2px);
+            background: #2b6cb0;
+            box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
         }
 
         .remove-test-btn {
-            background: #ef4444;
+            background: #e53e3e;
             color: white;
         }
 
         .remove-test-btn:hover {
-            background: #dc2626;
-            transform: translateY(-2px);
+            background: #c53030;
+            box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
         }
 
         .results-footer {
@@ -237,86 +225,69 @@
         }
 
         .result-card {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            padding: 2rem;
-            border-radius: 1rem;
-            color: white;
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow);
             position: relative;
             overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s ease;
         }
 
         .result-card:hover {
             transform: translateY(-5px);
-        }
-
-        .result-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.15));
-            transform: rotate(45deg);
-            animation: shimmer 2.5s infinite;
+            box-shadow: var(--hover-shadow);
         }
 
         .result-icon {
             font-size: 2rem;
+            color: var(--secondary-color);
             margin-bottom: 1rem;
-            color: #ffffff;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
         }
 
         .result-label {
             font-size: 1rem;
-            color: #e5e7eb;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
+            color: #718096;
+            font-weight: 500;
         }
 
         .result-value {
             font-size: 2rem;
             font-weight: 900;
-            letter-spacing: 1px;
-        }
-
-        .division-card {
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: var(--primary-color);
+            margin-top: 0.5rem;
         }
 
         #division {
-            background: transparent;
-            border: 2px solid rgba(255,255,255,0.2);
-            color: white;
-            font-size: 1.8rem;
-            width: 100 text-align: center;
-            font-weight: 700;
+            background: #f7f9fb;
+            box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.05), inset -4px -4px 8px rgba(255, 255, 255, 0.9);
+            border: none;
             border-radius: 0.6rem;
-            padding: 0.5rem;
+            padding: 0.6rem;
+            font-size: 1.5rem;
+            text-align: center;
+            color: var(--primary-color);
+            width: 100%;
         }
 
         #division:focus {
             outline: none;
-            border-color: rgba(255,255,255,0.5);
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
         }
 
         .credit-footer {
             text-align: center;
-            margin: 3rem 0 0;
-            padding: 2rem 0 0;
-            color: #6b7280;
-            font-size: 0.95rem;
-            border-top: 1px solid #e5e7eb;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+            color: #718096;
+            font-size: 0.9rem;
         }
 
         .credit-footer a {
             color: var(--secondary-color);
             text-decoration: none;
             font-weight: 600;
-            transition: color 0.3s ease;
         }
 
         .credit-footer a:hover {
@@ -328,17 +299,18 @@
             .results-footer {
                 grid-template-columns: 1fr;
             }
-            
-            .result-card {
-                padding: 1.5rem;
-            }
-            
-            .result-value {
-                font-size: 1.8rem;
-            }
-            
+
             .a4-container {
                 padding: 1.5rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .tests-cell {
+                flex-direction: column;
+                align-items: center;
             }
         }
 
@@ -352,11 +324,11 @@
                 border-radius: 0;
                 padding: 0;
             }
-            .result-card::before {
-                display: none;
-            }
             .add-test-btn, .remove-test-btn {
                 display: none;
+            }
+            .result-card {
+                box-shadow: none;
             }
             .credit-footer {
                 position: fixed;
@@ -366,7 +338,6 @@
                 background: white;
                 padding: 0.5rem;
                 border-top: 2px solid #ddd;
-                color: #444;
             }
         }
     </style>
@@ -374,19 +345,17 @@
 <body>
     <div class="a4-container">
         <div class="header">
-            <h1>6c Elmenhel 2</h1>
-            <h2>نظام احتساب النتائج الدراسية</h2>
+            <h1>نظام النتائج</h1>
+            <h2>احتساب النتائج الدراسية </h2>
         </div>
 
         <div class="content">
             <div class="info-section">
                 <div class="input-group">
-                    <label for="studentName">اسم الطالب:</label>
-                    <input type="text" class="info-input" id="studentName">
+                    <input type="text" class="info-input" id="studentName" placeholder="اسم الطالب">
                 </div>
                 <div class="input-group">
-                    <label for="studentNumber">الرقم:</label>
-                    <input type="text" class="info-input" id="studentNumber">
+                    <input type="text" class="info-input" id="studentNumber" placeholder="رقم الطالب">
                 </div>
             </div>
 
@@ -394,13 +363,13 @@
                 <table id="resultsTable">
                     <thead>
                         <tr>
-                            <th>المادة الدراسية</th>
+                            <th>المادة</th>
                             <th>المعامل</th>
                             <th>الاختبارات</th>
                             <th>امتحان 1</th>
                             <th>امتحان 2</th>
                             <th>امتحان 3</th>
-                            <th>معدل المادة</th>
+                            <th>المعدل</th>
                             <th>المجموع</th>
                         </tr>
                     </thead>
@@ -592,7 +561,7 @@
                     <div class="result-value" id="average">0.00</div>
                 </div>
                 
-                <div class="result-card division-card">
+                <div class="result-card">
                     <i class="fas fa-divide result-icon"></i>
                     <div class="result-label">قيمة التقسيم</div>
                     <input type="number" id="division" value="30" class="result-value">
@@ -638,16 +607,16 @@
 
         function saveData() {
             const data = {
-                name: document.getElementById('studentName').value,
-                number: document.getElementById('studentNumber').value,
-                division: document.getElementById('division').value,
+                name: document.getElementById('studentName').value || '',
+                number: document.getElementById('studentNumber').value || '',
+                division: document.getElementById('division').value || '30',
                 coefficients: {},
                 grades: {},
                 testCounts: {}
             };
 
             document.querySelectorAll('.coefficient-input').forEach(input => {
-                data.coefficients[input.dataset.subject] = input.value;
+                data.coefficients[input.dataset.subject] = input.value || '';
             });
 
             document.querySelectorAll('.tests-cell').forEach(cell => {
@@ -660,46 +629,55 @@
                 if (!data.grades[input.dataset.subject]) {
                     data.grades[input.dataset.subject] = {};
                 }
-                data.grades[input.dataset.subject][input.dataset.type] = input.value;
+                data.grades[input.dataset.subject][input.dataset.type] = input.value || '';
             });
 
-            localStorage.setItem('studentResults', JSON.stringify(data));
+            try {
+                localStorage.setItem('studentResults', JSON.stringify(data));
+            } catch (e) {
+                console.error('Error saving to localStorage:', e);
+            }
         }
 
         function loadData() {
-            const savedData = JSON.parse(localStorage.getItem('studentResults'));
-            if (!savedData) return;
+            try {
+                const savedData = localStorage.getItem('studentResults');
+                if (!savedData) return;
 
-            document.getElementById('studentName').value = savedData.name || '';
-            document.getElementById('studentNumber').value = savedData.number || '';
-            document.getElementById('division').value = savedData.division || '30';
+                const data = JSON.parse(savedData);
 
-            Object.entries(savedData.coefficients || {}).forEach(([subject, value]) => {
-                const input = document.querySelector(`.coefficient-input[data-subject="${subject}"]`);
-                if (input) input.value = value;
-            });
+                document.getElementById('studentName').value = data.name || '';
+                document.getElementById('studentNumber').value = data.number || '';
+                document.getElementById('division').value = data.division || '30';
 
-            Object.entries(savedData.testCounts || {}).forEach(([subject, count]) => {
-                const testsCell = document.querySelector(`.tests-cell[data-subject="${subject}"]`);
-                const currentTests = testsCell.querySelectorAll('.grade-input').length;
-                while (currentTests < count) {
-                    addTest(subject);
-                    currentTests++;
-                }
-                while (currentTests > count) {
-                    removeTest(subject);
-                    currentTests--;
-                }
-            });
-
-            Object.entries(savedData.grades || {}).forEach(([subject, types]) => {
-                Object.entries(types).forEach(([type, value]) => {
-                    const input = document.querySelector(`.grade-input[data-subject="${subject}"][data-type="${type}"]`);
+                Object.entries(data.coefficients || {}).forEach(([subject, value]) => {
+                    const input = document.querySelector(`.coefficient-input[data-subject="${subject}"]`);
                     if (input) input.value = value;
                 });
-            });
 
-            calculateResults();
+                Object.entries(data.testCounts || {}).forEach(([subject, count]) => {
+                    const testsCell = document.querySelector(`.tests-cell[data-subject="${subject}"]`);
+                    if (!testsCell) return;
+                    const currentTests = testsCell.querySelectorAll('.grade-input').length;
+                    while (currentTests < count) {
+                        addTest(subject);
+                    }
+                    while (currentTests > count) {
+                        removeTest(subject);
+                    }
+                });
+
+                Object.entries(data.grades || {}).forEach(([subject, types]) => {
+                    Object.entries(types).forEach(([type, value]) => {
+                        const input = document.querySelector(`.grade-input[data-subject="${subject}"][data-type="${type}"]`);
+                        if (input) input.value = value;
+                    });
+                });
+
+                calculateResults();
+            } catch (e) {
+                console.error('Error loading from localStorage:', e);
+            }
         }
 
         function calculateResults() {
@@ -762,7 +740,9 @@
     </script>
     <script>
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('serviceWorker.js');
+            navigator.serviceWorker.register('serviceWorker.js').catch(error => {
+                console.error('Service Worker registration failed:', error);
+            });
         }
     </script>
 </body>
