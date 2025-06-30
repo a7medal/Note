@@ -3,13 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نظام النتائج الدراسية</title>
+    <title>نظام النتائج</title>
     <link rel="icon" type="image/png" href="logo.png">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#1e3a8a">
     <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #3b82f6;
+            --text-color: #1f2937;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
         * {
             font-family: 'Cairo', sans-serif;
             box-sizing: border-box;
@@ -19,7 +28,7 @@
         }
 
         body {
-            background: linear-gradient(135deg, #e0e7ff, #f8fafc);
+            background: var(--bg-color);
             min-height: 100vh;
             padding: 1.5rem;
             display: flex;
@@ -29,14 +38,14 @@
 
         .a4-container {
             width: 100%;
-            max-width: 21cm;
-            background: #ffffff;
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+            max-width: 22cm;
+            background: var(--card-bg);
+            box-shadow: var(--shadow);
             border-radius: 1.5rem;
             overflow: hidden;
             padding: 2.5rem;
             position: relative;
-            animation: fadeIn 0.5s ease;
+            animation: fadeIn 0.5s ease-in;
         }
 
         @keyframes fadeIn {
@@ -47,8 +56,8 @@
         .header {
             text-align: center;
             margin-bottom: 2.5rem;
-            padding: 2rem;
-            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            padding: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
             border-radius: 1rem;
             position: relative;
@@ -62,7 +71,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2));
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.15));
             transform: rotate(45deg);
             animation: shimmer 3s infinite;
         }
@@ -75,21 +84,19 @@
         .header h1 {
             font-size: 2.2rem;
             margin-bottom: 0.5rem;
-            position: relative;
-            z-index: 1;
+            font-weight: 900;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
 
         .header h2 {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             font-weight: 400;
-            color: #e0e7ff;
-            position: relative;
-            z-index: 1;
+            color: #e5e7eb;
         }
 
         .info-section {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
             margin-bottom: 2.5rem;
         }
@@ -102,7 +109,7 @@
 
         .input-group label {
             font-size: 1rem;
-            color: #1e3a8a;
+            color: var(--text-color);
             font-weight: 600;
         }
 
@@ -117,22 +124,23 @@
         }
 
         .info-input:focus {
-            border-color: #3b82f6;
-            box-shadow: 0 0 8px rgba(59, 130, 246, 0.3);
             outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
 
         .table-container {
             overflow-x: auto;
             margin: 2.5rem 0;
             border-radius: 1rem;
-            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
-            background: #ffffff;
+            box-shadow: var(--shadow);
+            background: var(--card-bg);
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
+            background: var(--card-bg);
         }
 
         th, td {
@@ -143,69 +151,94 @@
         }
 
         th {
-            background: #1e3a8a;
+            background: var(--primary-color);
             color: white;
             font-weight: 700;
-            font-size: 0.95rem;
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
 
         tr:nth-child(even) {
             background: #f8fafc;
         }
 
-        .coefficient-input, .grade-input, .exam-input, .test-input {
+        tr:hover {
+            background: #f1f5f9;
+        }
+
+        .coefficient-input, .grade-input {
             width: 100%;
-            padding: 0.6rem;
+            padding: 0.7rem;
             border: 2px solid #e5e7eb;
             border-radius: 0.6rem;
             font-size: 0.95rem;
             text-align: center;
-            background: #ffffff;
+            background: white;
             font-weight: 600;
             transition: border-color 0.3s ease;
         }
 
-        .coefficient-input:focus, .grade-input:focus, .exam-input:focus, .test-input:focus {
-            border-color: #3b82f6;
+        .coefficient-input:focus, .grade-input:focus {
             outline: none;
+            border-color: var(--secondary-color);
         }
 
         .subject-average, .subject-total {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .add-test-btn, .remove-test-btn {
+            padding: 0.5rem 1rem;
+            margin: 0.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
             font-weight: 600;
-            color: #1e3a8a;
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
         .add-test-btn {
-            background: #3b82f6;
+            background: var(--secondary-color);
             color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 600;
-            transition: background 0.3s ease;
         }
 
         .add-test-btn:hover {
-            background: #1e3a8a;
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        .remove-test-btn {
+            background: #ef4444;
+            color: white;
+        }
+
+        .remove-test-btn:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
         }
 
         .results-footer {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
-            margin-top: 2.5rem;
+            margin-top: 3rem;
         }
 
         .result-card {
-            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
-            padding: 1.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 2rem;
             border-radius: 1rem;
             color: white;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .result-card:hover {
+            transform: translateY(-5px);
         }
 
         .result-card::before {
@@ -215,7 +248,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.15));
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.15));
             transform: rotate(45deg);
             animation: shimmer 2.5s infinite;
         }
@@ -223,51 +256,62 @@
         .result-icon {
             font-size: 2rem;
             margin-bottom: 1rem;
-            color: #93c5fd;
+            color: #ffffff;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
         }
 
         .result-label {
             font-size: 1rem;
-            color: #e0e7ff;
+            color: #e5e7eb;
             margin-bottom: 0.5rem;
+            font-weight: 600;
         }
 
         .result-value {
-            font-size: 1.8rem;
-            font-weight: 700;
+            font-size: 2rem;
+            font-weight: 900;
+            letter-spacing: 1px;
         }
 
         .division-card {
-            background: linear-gradient(135deg, #3b82f6, #60a5fa);
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
         }
 
         #division {
             background: transparent;
-            border: none;
+            border: 2px solid rgba(255,255,255,0.2);
             color: white;
             font-size: 1.8rem;
             width: 100%;
             text-align: center;
             font-weight: 700;
+            border-radius: 0.6rem;
+            padding: 0.5rem;
+        }
+
+        #division:focus {
+            outline: none;
+            border-color: rgba(255,255,255,0.5);
         }
 
         .credit-footer {
             text-align: center;
-            margin: 2.5rem 0 0;
-            padding: 1.5rem 0 0;
-            color: #4b5563;
+            margin: 3rem 0 0;
+            padding: 2rem 0 0;
+            color: #6b7280;
             font-size: 0.95rem;
             border-top: 1px solid #e5e7eb;
         }
 
         .credit-footer a {
-            color: #3b82f6;
+            color: var(--secondary-color);
             text-decoration: none;
             font-weight: 600;
+            transition: color 0.3s ease;
         }
 
         .credit-footer a:hover {
-            color: #1e3a8a;
+            color: var(--primary-color);
             text-decoration: underline;
         }
 
@@ -275,21 +319,17 @@
             .results-footer {
                 grid-template-columns: 1fr;
             }
-
+            
             .result-card {
-                padding: 1.2rem;
+                padding: 1.5rem;
             }
-
+            
             .result-value {
-                font-size: 1.6rem;
+                font-size: 1.8rem;
             }
-
-            .table-container {
-                font-size: 0.9rem;
-            }
-
-            th, td {
-                padding: 0.8rem;
+            
+            .a4-container {
+                padding: 1.5rem;
             }
         }
 
@@ -298,17 +338,17 @@
                 background: white;
                 padding: 0;
             }
-
             .a4-container {
                 box-shadow: none;
                 border-radius: 0;
                 padding: 0;
             }
-
-            .result-card::before, .header::before {
+            .result-card::before {
                 display: none;
             }
-
+            .add-test-btn, .remove-test-btn {
+                display: none;
+            }
             .credit-footer {
                 position: fixed;
                 bottom: 0;
@@ -316,12 +356,8 @@
                 right: 0;
                 background: white;
                 padding: 0.5rem;
-                border-top: 2px solid #d1d5db;
-                color: #1f2937;
-            }
-
-            .add-test-btn {
-                display: none;
+                border-top: 2px solid #ddd;
+                color: #444;
             }
         }
     </style>
@@ -329,8 +365,8 @@
 <body>
     <div class="a4-container">
         <div class="header">
-            <h1>نظام النتائج الدراسية</h1>
-            <h2>6c Elmenhel 2</h2>
+            <h1>6c Elmenhel 2</h1>
+            <h2>نظام احتساب النتائج الدراسية</h2>
         </div>
 
         <div class="content">
@@ -345,144 +381,136 @@
                 </div>
             </div>
 
+            <button class="add-test-btn" onclick="addTestColumn()">إضافة اختبار</button>
+            <button class="remove-test-btn" onclick="removeTestColumn()">إزالة اختبار</button>
+
             <div class="table-container">
-                <table>
-                    <tr>
-                        <th rowspan="2">المادة الدراسية</th>
-                        <th rowspan="2">المعامل</th>
-                        <th colspan="3">الاختبارات</th>
-                        <th colspan="3">الامتحانات</th>
-                        <th rowspan="2">معدل المادة</th>
-                        <th rowspan="2">المجموع</th>
-                    </tr>
-                    <tr>
-                        <th>اختبار 1</th>
-                        <th>اختبار 2</th>
-                        <th>اختبار 3</th>
-                        <th>الفصل الأول</th>
-                        <th>الفصل الثاني</th>
-                        <th>الفصل الثالث</th>
-                    </tr>
-                    <tr data-subject="arabic">
-                        <td>اللغة العربية</td>
-                        <td><input type="number" class="coefficient-input" value="2"></td>
-                        <td><input type="number" class="test-input" data-type="test1"></td>
-                        <td><input type="number" class="test-input" data-type="test2"></td>
-                        <td><input type="number" class="test-input" data-type="test3"></td>
-                        <td><input type="number" class="exam-input" data-type="exam1"></td>
-                        <td><input type="number" class="exam-input" data-type="exam2"></td>
-                        <td><input type="number" class="exam-input" data-type="exam3"></td>
-                        <td class="subject-average">0.00</td>
-                        <td class="subject-total">0.00</td>
-                    </tr>
-                    <tr data-subject="history">
-                        <td>التاريخ</td>
-                        <td><input type="number" class="coefficient-input" value="2"></td>
-                        <td><input type="number" class="test-input" data-type="test1"></td>
-                        <td><input type="number" class="test-input" data-type="test2"></td>
-                        <td><input type="number" class="test-input" data-type="test3"></td>
-                        <td><input type="number" class="exam-input" data-type="exam1"></td>
-                        <td><input type="number" class="exam-input" data-type="exam2"></td>
-                        <td><input type="number" class="exam-input" data-type="exam3"></td>
-                        <td class="subject-average">0.00</td>
-                        <td class="subject-total">0.00</td>
-                    </tr>
-                    <tr data-subject="islamic">
-                        <td>التربية الإسلامية</td>
-                        <td><input type="number" class="coefficient-input" value="2"></td>
-                        <td><input type="number" class="test-input" data-type="test1"></td>
-                        <td><input type="number" class="test-input" data-type="test2"></td>
-                        <td><input type="number" class="test-input" data-type="test3"></td>
-                        <td><input type="number" class="exam-input" data-type="exam1"></td>
-                        <td><input type="number" class="exam-input" data-type="exam2"></td>
-                        <td><input type="number" class="exam-input" data-type="exam3"></td>
-                        <td class="subject-average">0.00</td>
-                        <td class="subject-total">0.00</td>
-                    </tr>
-                    <tr data-subject="civics">
-                        <td>التربية المدنية</td>
-                        <td><input type="number" class="coefficient-input" value="2"></td>
-                        <td><input type="number" class="test-input" data-type="test1"></td>
-                        <td><input type="number" class="test-input" data-type="test2"></td>
-                        <td><input type="number" class="test-input" data-type="test3"></td>
-                        <td><input type="number" class="exam-input" data-type="exam1"></td>
-                        <td><input type="number" class="exam-input" data-type="exam2"></td>
-                        <td><input type="number" class="exam-input" data-type="exam3"></td>
-                        <td class="subject-average">0.00</td>
-                        <td class="subject-total">0.00</td>
-                    </tr>
-                    <tr data-subject="philosophy">
-                        <td>الفلسفة</td>
-                        <td><input type="number" class="coefficient-input" value="2"></td>
-                        <td><input type="number" class="test-input" data-type="test1"></td>
-                        <td><input type="number" class="test-input" data-type="test2"></td>
-                        <td><input type="number" class="test-input" data-type="test3"></td>
-                        <td><input type="number" class="exam-input" data-type="exam1"></td>
-                        <td><input type="number" class="exam-input" data-type="exam2"></td>
-                        <td><input type="number" class="exam-input" data-type="exam3"></td>
-                        <td class="subject-average">0.00</td>
-                        <td class="subject-total">0.00</td>
-                    </tr>
-                    <tr data-subject="math">
-                        <td>الرياضيات</td>
-                        <td><input type="number" class="coefficient-input" value="7"></td>
-                        <td><input type="number" class="test-input" data-type="test1"></td>
-                        <td><input type="number" class="test-input" data-type="test2"></td>
-                        <td><input type="number" class="test-input" data-type="test3"></td>
-                        <td><input type="number" class="exam-input" data-type="exam1"></td>
-                        <td><input type="number" class="exam-input" data-type="exam2"></td>
-                        <td><input type="number" class="exam-input" data-type="exam3"></td>
-                        <td class="subject-average">0.00</td>
-                        <td class="subject-total">0.00</td>
-                    </tr>
-                    <tr data-subject="physics">
-                        <td>الفيزياء</td>
-                        <td><input type="number" class="coefficient-input" value="6"></td>
-                        <td><input type="number" class="test-input" data-type="test1"></td>
-                        <td><input type="number" class="test-input" data-type="test2"></td>
-                        <td><input type="number" class="test-input" data-type="test3"></td>
-                        <td><input type="number" class="exam-input" data-type="exam1"></td>
-                        <td><input type="number" class="exam-input" data-type="exam2"></td>
-                        <td><input type="number" class="exam-input" data-type="exam3"></td>
-                        <td class="subject-average">0.00</td>
-                        <td class="subject-total">0.00</td>
-                    </tr>
-                    <tr data-subject="science">
-                        <td>العلوم</td>
-                        <td><input type="number" class="coefficient-input" value="3"></td>
-                        <td><input type="number" class="test-input" data-type="test1"></td>
-                        <td><input type="number" class="test-input" data-type="test2"></td>
-                        <td><input type="number" class="test-input" data-type="test3"></td>
-                        <td><input type="number" class="exam-input" data-type="exam1"></td>
-                        <td><input type="number" class="exam-input" data-type="exam2"></td>
-                        <td><input type="number" class="exam-input" data-type="exam3"></td>
-                        <td class="subject-average">0.00</td>
-                        <td class="subject-total">0.00</td>
-                    </tr>
-                    <tr data-subject="english">
-                        <td>الإنجليزية</td>
-                        <td><input type="number" class="coefficient-input" value="2"></td>
-                        <td><input type="number" class="test-input" data-type="test1"></td>
-                        <td><input type="number" class="test-input" data-type="test2"></td>
-                        <td><input type="number" class="test-input" data-type="test3"></td>
-                        <td><input type="number" class="exam-input" data-type="exam1"></td>
-                        <td><input type="number" class="exam-input" data-type="exam2"></td>
-                        <td><input type="number" class="exam-input" data-type="exam3"></td>
-                        <td class="subject-average">0.00</td>
-                        <td class="subject-total">0.00</td>
-                    </tr>
-                    <tr data-subject="french">
-                        <td>الفرنسية</td>
-                        <td><input type="number" class="coefficient-input" value="2"></td>
-                        <td><input type="number" class="test-input" data-type="test1"></td>
-                        <td><input type="number" class="test-input" data-type="test2"></td>
-                        <td><input type="number" class="test-input" data-type="test3"></td>
-                        <td><input type="number" class="exam-input" data-type="exam1"></td>
-                        <td><input type="number" class="exam-input" data-type="exam2"></td>
-                        <td><input type="number" class="exam-input" data-type="exam3"></td>
-                        <td class="subject-average">0.00</td>
-                        <td class="subject-total">0.00</td>
-                    </tr>
+                <table id="resultsTable">
+                    <thead>
+                        <tr>
+                            <th>المادة الدراسية</th>
+                            <th>المعامل</th>
+                            <th>اختبار 1</th>
+                            <th>اختبار 2</th>
+                            <th>امتحان 1</th>
+                            <th>امتحان 2</th>
+                            <th>امتحان 3</th>
+                            <th>معدل المادة</th>
+                            <th>المجموع</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>اللغة العربية</td>
+                            <td><input type="number" class="coefficient-input" value="2" data-subject="arabic"></td>
+                            <td><input type="number" class="grade-input" data-subject="arabic" data-type="test1"></td>
+                            <td><input type="number" class="grade-input" data-subject="arabic" data-type="test2"></td>
+                            <td><input type="number" class="grade-input" data-subject="arabic" data-type="exam1"></td>
+                            <td><input type="number" class="grade-input" data-subject="arabic" data-type="exam2"></td>
+                            <td><input type="number" class="grade-input" data-subject="arabic" data-type="exam3"></td>
+                            <td class="subject-average" data-subject="arabic">0.00</td>
+                            <td class="subject-total" data-subject="arabic">0.00</td>
+                        </tr>
+                        <tr>
+                            <td>التاريخ</td>
+                            <td><input type="number" class="coefficient-input" value="2" data-subject="history"></td>
+                            <td><input type="number" class="grade-input" data-subject="history" data-type="test1"></td>
+                            <td><input type="number" class="grade-input" data-subject="history" data-type="test2"></td>
+                            <td><input type="number" class="grade-input" data-subject="history" data-type="exam1"></td>
+                            <td><input type="number" class="grade-input" data-subject="history" data-type="exam2"></td>
+                            <td><input type="number" class="grade-input" data-subject="history" data-type="exam3"></td>
+                            <td class="subject-average" data-subject="history">0.00</td>
+                            <td class="subject-total" data-subject="history">0.00</td>
+                        </tr>
+                        <tr>
+                            <td>التربية الإسلامية</td>
+                            <td><input type="number" class="coefficient-input" value="2" data-subject="islamic"></td>
+                            <td><input type="number" class="grade-input" data-subject="islamic" data-type="test1"></td>
+                            <td><input type="number" class="grade-input" data-subject="islamic" data-type="test2"></td>
+                            <td><input type="number" class="grade-input" data-subject="islamic" data-type="exam1"></td>
+                            <td><input type="number" class="grade-input" data-subject="islamic" data-type="exam2"></td>
+                            <td><input type="number" class="grade-input" data-subject="islamic" data-type="exam3"></td>
+                            <td class="subject-average" data-subject="islamic">0.00</td>
+                            <td class="subject-total" data-subject="islamic">0.00</td>
+                        </tr>
+                        <tr>
+                            <td>التربية المدنية</td>
+                            <td><input type="number" class="coefficient-input" value="2" data-subject="civics"></td>
+                            <td><input type="number" class="grade-input" data-subject="civics" data-type="test1"></td>
+                            <td><input type="number" class="grade-input" data-subject="civics" data-type="test2"></td>
+                            <td><input type="number" class="grade-input" data-subject="civics" data-type="exam1"></td>
+                            <td><input type="number" class="grade-input" data-subject="civics" data-type="exam2"></td>
+                            <td><input type="number" class="grade-input" data-subject="civics" data-type="exam3"></td>
+                            <td class="subject-average" data-subject="civics">0.00</td>
+                            <td class="subject-total" data-subject="civics">0.00</td>
+                        </tr>
+                        <tr>
+                            <td>الفلسفة</td>
+                            <td><input type="number" class="coefficient-input" value="2" data-subject="philosophy"></td>
+                            <td><input type="number" class="grade-input" data-subject="philosophy" data-type="test1"></td>
+                            <td><input type="number" class="grade-input" data-subject="philosophy" data-type="test2"></td>
+                            <td><input type="number" class="grade-input" data-subject="philosophy" data-type="exam1"></td>
+                            <td><input type="number" class="grade-input" data-subject="philosophy" data-type="exam2"></td>
+                            <td><input type="number" class="grade-input" data-subject="philosophy" data-type="exam3"></td>
+                            <td class="subject-average" data-subject="philosophy">0.00</td>
+                            <td class="subject-total" data-subject="philosophy">0.00</td>
+                        </tr>
+                        <tr>
+                            <td>الرياضيات</td>
+                            <td><input type="number" class="coefficient-input" value="7" data-subject="math"></td>
+                            <td><input type="number" class="grade-input" data-subject="math" data-type="test1"></td>
+                            <td><input type="number" class="grade-input" data-subject="math" data-type="test2"></td>
+                            <td><input type="number" class="grade-input" data-subject="math" data-type="exam1"></td>
+                            <td><input type="number" class="grade-input" data-subject="math" data-type="exam2"></td>
+                            <td><input type="number" class="grade-input" data-subject="math" data-type="exam3"></td>
+                            <td class="subject-average" data-subject="math">0.00</td>
+                            <td class="subject-total" data-subject="math">0.00</td>
+                        </tr>
+                        <tr>
+                            <td>الفيزياء</td>
+                            <td><input type="number" class="coefficient-input" value="6" data-subject="physics"></td>
+                            <td><input type="number" class="grade-input" data-subject="physics" data-type="test1"></td>
+                            <td><input type="number" class="grade-input" data-subject="physics" data-type="test2"></td>
+                            <td><input type="number" class="grade-input" data-subject="physics" data-type="exam1"></td>
+                            <td><input type="number" class="grade-input" data-subject="physics" data-type="exam2"></td>
+                            <td><input type="number" class="grade-input" data-subject="physics" data-type="exam3"></td>
+                            <td class="subject-average" data-subject="physics">0.00</td>
+                            <td class="subject-total" data-subject="physics">0.00</td>
+                        </tr>
+                        <tr>
+                            <td>العلوم</td>
+                            <td><input type="number" class="coefficient-input" value="3" data-subject="science"></td>
+                            <td><input type="number" class="grade-input" data-subject="science" data-type="test1"></td>
+                            <td><input type="number" class="grade-input" data-subject="science" data-type="test2"></td>
+                            <td><input type="number" class="grade-input" data-subject="science" data-type="exam1"></td>
+                            <td><input type="number" class="grade-input" data-subject="science" data-type="exam2"></td>
+                            <td><input type="number" class="grade-input" data-subject="science" data-type="exam3"></td>
+                            <td class="subject-average" data-subject="science">0.00</td>
+                            <td class="subject-total" data-subject="science">0.00</td>
+                        </tr>
+                        <tr>
+                            <td>الإنجليزية</td>
+                            <td><input type="number" class="coefficient-input" value="2" data-subject="english"></td>
+                            <td><input type="number" class="grade-input" data-subject="english" data-type="test1"></td>
+                            <td><input type="number" class="grade-input" data-subject="english" data-type="test2"></td>
+                            <td><input type="number" class="grade-input" data-subject="english" data-type="exam1"></td>
+                            <td><input type="number" class="grade-input" data-subject="english" data-type="exam2"></td>
+                            <td><input type="number" class="grade-input" data-subject="english" data-type="exam3"></td>
+                            <td class="subject-average" data-subject="english">0.00</td>
+                            <td class="subject-total" data-subject="english">0.00</td>
+                        </tr>
+                        <tr>
+                            <td>الفرنسية</td>
+                            <td><input type="number" class="coefficient-input" value="2" data-subject="french"></td>
+                            <td><input type="number" class="grade-input" data-subject="french" data-type="test1"></td>
+                            <td><input type="number" class="grade-input" data-subject="french" data-type="test2"></td>
+                            <td><input type="number" class="grade-input" data-subject="french" data-type="exam1"></td>
+                            <td><input type="number" class="grade-input" data-subject="french" data-type="exam2"></td>
+                            <td><input type="number" class="grade-input" data-subject="french" data-type="exam3"></td>
+                            <td class="subject-average" data-subject="french">0.00</td>
+                            <td class="subject-total" data-subject="french">0.00</td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
 
@@ -492,11 +520,13 @@
                     <div class="result-label">المجموع الكلي</div>
                     <div class="result-value" id="total">0.00</div>
                 </div>
+                
                 <div class="result-card">
                     <i class="fas fa-chart-line result-icon"></i>
                     <div class="result-label">المعدل العام</div>
                     <div class="result-value" id="average">0.00</div>
                 </div>
+                
                 <div class="result-card division-card">
                     <i class="fas fa-divide result-icon"></i>
                     <div class="result-label">قيمة التقسيم</div>
@@ -505,36 +535,75 @@
             </div>
 
             <div class="credit-footer">
-                نظام إلكتروني لاحتساب النتائج الدراسية<br>تصميم وتطوير: 
-                <a href="#">Ahmedal Ahmedbedi</a>
+                نظام إلكتروني لاحتساب النتائج الدراسية<br>
+                تصميم وتطوير: Ahmedal Ahmedbedi
             </div>
         </div>
     </div>
 
     <script>
+        let testCount = 2; // Initial number of test columns
+
+        function addTestColumn() {
+            testCount++;
+            const table = document.getElementById('resultsTable');
+            const headerRow = table.querySelector('thead tr');
+            const newHeader = document.createElement('th');
+            newHeader.textContent = `اختبار ${testCount}`;
+            headerRow.insertBefore(newHeader, headerRow.children[headerRow.children.length - 3]); // Before exams
+
+            const rows = table.querySelectorAll('tbody tr');
+            rows.forEach(row => {
+                const newCell = document.createElement('td');
+                const input = document.createElement('input');
+                input.type = 'number';
+                input.className = 'grade-input';
+                input.dataset.subject = row.querySelector('.coefficient-input').dataset.subject;
+                input.dataset.type = `test${testCount}`;
+                input.addEventListener('input', calculateResults);
+                newCell.appendChild(input);
+                row.insertBefore(newCell, row.children[row.children.length - 3]);
+            });
+
+            calculateResults();
+            saveData();
+        }
+
+        function removeTestColumn() {
+            if (testCount <= 1) return; // Prevent removing all test columns
+            const table = document.getElementById('resultsTable');
+            const headerRow = table.querySelector('thead tr');
+            headerRow.removeChild(headerRow.children[2 + testCount - 1]);
+
+            const rows = table.querySelectorAll('tbody tr');
+            rows.forEach(row => {
+                row.removeChild(row.children[2 + testCount - 1]);
+            });
+
+            testCount--;
+            calculateResults();
+            saveData();
+        }
+
         function saveData() {
             const data = {
                 name: document.getElementById('studentName').value,
                 number: document.getElementById('studentNumber').value,
                 division: document.getElementById('division').value,
-                subjects: {}
+                testCount: testCount,
+                coefficients: {},
+                grades: {}
             };
 
-            document.querySelectorAll('tr[data-subject]').forEach(row => {
-                const subject = row.dataset.subject;
-                data.subjects[subject] = {
-                    coefficient: row.querySelector('.coefficient-input').value,
-                    tests: [
-                        row.querySelector('.test-input[data-type="test1"]').value,
-                        row.querySelector('.test-input[data-type="test2"]').value,
-                        row.querySelector('.test-input[data-type="test3"]').value
-                    ],
-                    exams: [
-                        row.querySelector('.exam-input[data-type="exam1"]').value,
-                        row.querySelector('.exam-input[data-type="exam2"]').value,
-                        row.querySelector('.exam-input[data-type="exam3"]').value
-                    ]
-                };
+            document.querySelectorAll('.coefficient-input').forEach(input => {
+                data.coefficients[input.dataset.subject] = input.value;
+            });
+
+            document.querySelectorAll('.grade-input').forEach(input => {
+                if (!data.grades[input.dataset.subject]) {
+                    data.grades[input.dataset.subject] = {};
+                }
+                data.grades[input.dataset.subject][input.dataset.type] = input.value;
             });
 
             localStorage.setItem('studentResults', JSON.stringify(data));
@@ -547,78 +616,77 @@
             document.getElementById('studentName').value = savedData.name || '';
             document.getElementById('studentNumber').value = savedData.number || '';
             document.getElementById('division').value = savedData.division || '30';
+            testCount = savedData.testCount || 2;
 
-            Object.entries(savedData.subjects || {}).forEach(([subject, data]) => {
-                const row = document.querySelector(`tr[data-subject="${subject}"]`);
-                if (row) {
-                    row.querySelector('.coefficient-input').value = data.coefficient || '';
-                    row.querySelector('.test-input[data-type="test1"]').value = data.tests[0] || '';
-                    row.querySelector('.test-input[data-type="test2"]').value = data.tests[1] || '';
-                    row.querySelector('.test-input[data-type="test3"]').value = data.tests[2] || '';
-                    row.querySelector('.exam-input[data-type="exam1"]').value = data.exams[0] || '';
-                    row.querySelector('.exam-input[data-type="exam2"]').value = data.exams[1] || '';
-                    row.querySelector('.exam-input[data-type="exam3"]').value = data.exams[2] || '';
-                }
+            // Rebuild test columns if needed
+            while (testCount > 2) {
+                addTestColumn();
+                testCount--;
+            }
+            testCount = savedData.testCount || 2;
+
+            Object.entries(savedData.coefficients || {}).forEach(([subject, value]) => {
+                const input = document.querySelector(`.coefficient-input[data-subject="${subject}"]`);
+                if (input) input.value = value;
+            });
+
+            Object.entries(savedData.grades || {}).forEach(([subject, types]) => {
+                Object.entries(types).forEach(([type, value]) => {
+                    const input = document.querySelector(`.grade-input[data-subject="${subject}"][data-type="${type}"]`);
+                    if (input) input.value = value;
+                });
             });
 
             calculateResults();
         }
 
         function calculateResults() {
-            let totalSum = 0;
+            let grandTotal = 0;
+            const subjects = ['arabic', 'history', 'islamic', 'civics', 'philosophy', 'math', 'physics', 'science', 'english', 'french'];
 
-            document.querySelectorAll('tr[data-subject]').forEach(row => {
-                const coefficient = parseFloat(row.querySelector('.coefficient-input').value) || 0;
-                const tests = [
-                    parseFloat(row.querySelector('.test-input[data-type="test1"]').value) || 0,
-                    parseFloat(row.querySelector('.test-input[data-type="test2"]').value) || 0,
-                    parseFloat(row.querySelector('.test-input[data-type="test3"]').value) || 0
-                ];
-                const exams = [
-                    parseFloat(row.querySelector('.exam-input[data-type="exam1"]').value) || 0,
-                    parseFloat(row.querySelector('.exam-input[data-type="exam2"]').value) || 0,
-                    parseFloat(row.querySelector('.exam-input[data-type="exam3"]').value) || 0
-                ];
+            subjects.forEach(subject => {
+                let testSum = 0;
+                let testCount = 0;
+                for (let i = 1; i <= testCount; i++) {
+                    const test = parseFloat(document.querySelector(`.grade-input[data-subject="${subject}"][data-type="test${i}"]`).value) || 0;
+                    if (test > 0) {
+                        testSum += test;
+                        testCount++;
+                    }
+                }
+                const exam1 = parseFloat(document.querySelector(`.grade-input[data-subject="${subject}"][data-type="exam1"]`).value) || 0;
+                const exam2 = parseFloat(document.querySelector(`.grade-input[data-subject="${subject}"][data-type="exam2"]`).value) || 0;
+                const exam3 = parseFloat(document.querySelector(`.grade-input[data-subject="${subject}"][data-type="exam3"]`).value) || 0;
+                const coefficient = parseFloat(document.querySelector(`.coefficient-input[data-subject="${subject}"]`).value) || 0;
 
-                // Calculate subject average: (sum of tests / number of tests * 3) + (exam1 * 1) + (exam2 * 2) + (exam3 * 3) / 9
-                const validTests = tests.filter(t => t > 0);
-                const testAverage = validTests.length > 0 ? validTests.reduce((sum, val) => sum + val, 0) / validTests.length : 0;
-                const subjectAverage = ((testAverage * 3) + (exams[0] * 1) + (exams[1] * 2) + (exams[2] * 3)) / 9;
-
-                // Calculate subject total: subject average * coefficient
+                const testAverage = testCount > 0 ? (testSum / testCount) * 3 : 0;
+                const subjectAverage = (testAverage + (exam1 * 1) + (exam2 * 2) + (exam3 * 3)) / 9;
                 const subjectTotal = subjectAverage * coefficient;
 
-                // Update table cells
-                row.querySelector('.subject-average').textContent = subjectAverage.toFixed(2);
-                row.querySelector('.subject-total').textContent = subjectTotal.toFixed(2);
-
-                // Add to total sum
-                totalSum += subjectTotal;
+                document.querySelector(`.subject-average[data-subject="${subject}"]`).textContent = subjectAverage.toFixed(2);
+                document.querySelector(`.subject-total[data-subject="${subject}"]`).textContent = subjectTotal.toFixed(2);
+                
+                grandTotal += subjectTotal;
             });
 
-            // Calculate overall average
             const division = parseFloat(document.getElementById('division').value) || 30;
-            const average = totalSum / division;
+            const average = grandTotal / division;
 
-            // Update footer
-            document.getElementById('total').textContent = totalSum.toFixed(2);
+            document.getElementById('total').textContent = grandTotal.toFixed(2);
             document.getElementById('average').textContent = average.toFixed(2);
 
             saveData();
         }
 
-        // Event listeners for input changes
         document.querySelectorAll('input').forEach(input => {
             input.addEventListener('input', calculateResults);
         });
 
-        // Load data and calculate results on page load
         window.addEventListener('load', () => {
             loadData();
             calculateResults();
         });
 
-        // Print functionality
         window.addEventListener('keydown', (e) => {
             if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
                 e.preventDefault();
