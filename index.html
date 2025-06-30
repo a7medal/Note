@@ -271,6 +271,13 @@
             margin-top: 3rem;
         }
 
+        .exam-results-footer {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
         .result-card {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             padding: 2rem;
@@ -322,7 +329,7 @@
             background: linear-gradient(135deg, #3b82f6, #2563eb);
         }
 
-        #division, #exam-total {
+        #division, #exam-division, #exam-total, #exam-average {
             background: transparent;
             border: 2px solid rgba(255,255,255,0.2);
             color: white;
@@ -334,7 +341,7 @@
             padding: 0.5rem;
         }
 
-        #division:focus, #exam-total:focus {
+        #division:focus, #exam-division:focus, #exam-total:focus, #exam-average:focus {
             outline: none;
             border-color: rgba(255,255,255,0.5);
         }
@@ -361,7 +368,7 @@
         }
 
         @media (max-width: 768px) {
-            .results-footer {
+            .results-footer, .exam-results-footer {
                 grid-template-columns: 1fr;
             }
 
@@ -449,7 +456,7 @@
                         <thead>
                             <tr>
                                 <th>المادة الدراسية</th>
-                                <th>المعامل onderzoek</th>
+                                <th>المعامل</th>
                                 <th>الاختبارات</th>
                                 <th>امتحان 1</th>
                                 <th>امتحان 2</th>
@@ -671,102 +678,90 @@
                             <tr>
                                 <th>المادة الدراسية</th>
                                 <th>المعامل</th>
-                                <th>امتحان 1</th>
-                                <th>امتحان 2</th>
-                                <th>امتحان 3</th>
-                                <th>النتيجة</th>
+                                <th>الامتحان</th>
+                                <th>معدل المادة</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>اللغة العربية</td>
                                 <td><input type="number" class="coefficient-input" value="2" data-subject="arabic"></td>
-                                <td><input type="number" class="grade-input" data-subject="arabic" data-type="exam1"></td>
-                                <td><input type="number" class="grade-input" data-subject="arabic" data-type="exam2"></td>
-                                <td><input type="number" class="grade-input" data-subject="arabic" data-type="exam3"></td>
+                                <td><input type="number" class="grade-input" data-subject="arabic" data-type="exam"></td>
                                 <td class="exam-result" data-subject="arabic">0.00</td>
                             </tr>
                             <tr>
                                 <td>التاريخ</td>
                                 <td><input type="number" class="coefficient-input" value="2" data-subject="history"></td>
-                                <td><input type="number" class="grade-input" data-subject="history" data-type="exam1"></td>
-                                <td><input type="number" class="grade-input" data-subject="history" data-type="exam2"></td>
-                                <td><input type="number" class="grade-input" data-subject="history" data-type="exam3"></td>
+                                <td><input type="number" class="grade-input" data-subject="history" data-type="exam"></td>
                                 <td class="exam-result" data-subject="history">0.00</td>
                             </tr>
                             <tr>
                                 <td>التربية الإسلامية</td>
                                 <td><input type="number" class="coefficient-input" value="2" data-subject="islamic"></td>
-                                <td><input type="number" class="grade-input" data-subject="islamic" data-type="exam1"></td>
-                                <td><input type="number" class="grade-input" data-subject="islamic" data-type="exam2"></td>
-                                <td><input type="number" class="grade-input" data-subject="islamic" data-type="exam3"></td>
+                                <td><input type="number" class="grade-input" data-subject="islamic" data-type="exam"></td>
                                 <td class="exam-result" data-subject="islamic">0.00</td>
                             </tr>
                             <tr>
                                 <td>التربية المدنية</td>
                                 <td><input type="number" class="coefficient-input" value="2" data-subject="civics"></td>
-                                <td><input type="number" class="grade-input" data-subject="civics" data-type="exam1"></td>
-                                <td><input type="number" class="grade-input" data-subject="civics" data-type="exam2"></td>
-                                <td><input type="number" class="grade-input" data-subject="civics" data-type="exam3"></td>
+                                <td><input type="number" class="grade-input" data-subject="civics" data-type="exam"></td>
                                 <td class="exam-result" data-subject="civics">0.00</td>
                             </tr>
                             <tr>
                                 <td>الفلسفة</td>
                                 <td><input type="number" class="coefficient-input" value="2" data-subject="philosophy"></td>
-                                <td><input type="number" class="grade-input" data-subject="philosophy" data-type="exam1"></td>
-                                <td><input type="number" class="grade-input" data-subject="philosophy" data-type="exam2"></td>
-                                <td><input type="number" class="grade-input" data-subject="philosophy" data-type="exam3"></td>
+                                <td><input type="number" class="grade-input" data-subject="philosophy" data-type="exam"></td>
                                 <td class="exam-result" data-subject="philosophy">0.00</td>
                             </tr>
                             <tr>
                                 <td>الرياضيات</td>
                                 <td><input type="number" class="coefficient-input" value="7" data-subject="math"></td>
-                                <td><input type="number" class="grade-input" data-subject="math" data-type="exam1"></td>
-                                <td><input type="number" class="grade-input" data-subject="math" data-type="exam2"></td>
-                                <td><input type="number" class="grade-input" data-subject="math" data-type="exam3"></td>
+                                <td><input type="number" class="grade-input" data-subject="math" data-type="exam"></td>
                                 <td class="exam-result" data-subject="math">0.00</td>
                             </tr>
                             <tr>
                                 <td>الفيزياء</td>
                                 <td><input type="number" class="coefficient-input" value="6" data-subject="physics"></td>
-                                <td><input type="number" class="grade-input" data-subject="physics" data-type="exam1"></td>
-                                <td><input type="number" class="grade-input" data-subject="physics" data-type="exam2"></td>
-                                <td><input type="number" class="grade-input" data-subject="physics" data-type="exam3"></td>
+                                <td><input type="number" class="grade-input" data-subject="physics" data-type="exam"></td>
                                 <td class="exam-result" data-subject="physics">0.00</td>
                             </tr>
                             <tr>
                                 <td>العلوم</td>
                                 <td><input type="number" class="coefficient-input" value="3" data-subject="science"></td>
-                                <td><input type="number" class="grade-input" data-subject="science" data-type="exam1"></td>
-                                <td><input type="number" class="grade-input" data-subject="science" data-type="exam2"></td>
-                                <td><input type="number" class="grade-input" data-subject="science" data-type="exam3"></td>
+                                <td><input type="number" class="grade-input" data-subject="science" data-type="exam"></td>
                                 <td class="exam-result" data-subject="science">0.00</td>
                             </tr>
                             <tr>
                                 <td>الإنجليزية</td>
                                 <td><input type="number" class="coefficient-input" value="2" data-subject="english"></td>
-                                <td><input type="number" class="grade-input" data-subject="english" data-type="exam1"></td>
-                                <td><input type="number" class="grade-input" data-subject="english" data-type="exam2"></td>
-                                <td><input type="number" class="grade-input" data-subject="english" data-type="exam3"></td>
+                                <td><input type="number" class="grade-input" data-subject="english" data-type="exam"></td>
                                 <td class="exam-result" data-subject="english">0.00</td>
                             </tr>
                             <tr>
                                 <td>الفرنسية</td>
                                 <td><input type="number" class="coefficient-input" value="2" data-subject="french"></td>
-                                <td><input type="number" class="grade-input" data-subject="french" data-type="exam1"></td>
-                                <td><input type="number" class="grade-input" data-subject="french" data-type="exam2"></td>
-                                <td><input type="number" class="grade-input" data-subject="french" data-type="exam3"></td>
+                                <td><input type="number" class="grade-input" data-subject="french" data-type="exam"></td>
                                 <td class="exam-result" data-subject="french">0.00</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <div class="results-footer">
+                <div class="exam-results-footer">
                     <div class="result-card">
                         <i class="fas fa-calculator result-icon"></i>
                         <div class="result-label">المجموع الكلي</div>
                         <div class="result-value" id="exam-total">0.00</div>
+                    </div>
+                    <div class="result-card">
+                        <i class="fas fa-chart-line result-icon"></i>
+                        <div class="result-label">المعدل العام</div>
+                        <div class="result-value" id="exam-average">0.00</div>
+                    </div>
+                    <div class="result-card division-card">
+                        <i class="fas fa-divide result-icon"></i>
+                        <div class="result-label">قيمة التقسيم</div>
+                        <input type="number" id="exam-division" value="30" class="result-value">
                     </div>
                 </div>
             </div>
@@ -786,9 +781,19 @@
             document.querySelector(`.tab[onclick="switchTab('${tab}')"]`).classList.add('active');
             document.getElementById(`${tab}-results`).classList.add('active');
 
-            // Sync student info between tabs
+            // Sync student info and coefficients between tabs
             document.getElementById('studentNameExam').value = document.getElementById('studentName').value;
             document.getElementById('studentNumberExam').value = document.getElementById('studentNumber').value;
+            document.getElementById('exam-division').value = document.getElementById('division').value;
+
+            const subjects = ['arabic', 'history', 'islamic', 'civics', 'philosophy', 'math', 'physics', 'science', 'english', 'french'];
+            subjects.forEach(subject => {
+                const annualCoefficient = document.querySelector(`#annual-results .coefficient-input[data-subject="${subject}"]`);
+                const examCoefficient = document.querySelector(`#exam-results .coefficient-input[data-subject="${subject}"]`);
+                if (annualCoefficient && examCoefficient) {
+                    examCoefficient.value = annualCoefficient.value;
+                }
+            });
 
             calculateResults();
             calculateExamResults();
@@ -830,7 +835,8 @@
                 division: document.getElementById('division').value,
                 coefficients: {},
                 grades: {},
-                testCounts: {}
+                testCounts: {},
+                examGrades: {}
             };
 
             document.querySelectorAll('.coefficient-input').forEach(input => {
@@ -843,11 +849,18 @@
                 data.testCounts[subject] = testInputs.length;
             });
 
-            document.querySelectorAll('.grade-input').forEach(input => {
+            document.querySelectorAll('#annual-results .grade-input').forEach(input => {
                 if (!data.grades[input.dataset.subject]) {
                     data.grades[input.dataset.subject] = {};
                 }
                 data.grades[input.dataset.subject][input.dataset.type] = input.value;
+            });
+
+            document.querySelectorAll('#exam-results .grade-input').forEach(input => {
+                if (!data.examGrades[input.dataset.subject]) {
+                    data.examGrades[input.dataset.subject] = {};
+                }
+                data.examGrades[input.dataset.subject][input.dataset.type] = input.value;
             });
 
             localStorage.setItem('studentResults', JSON.stringify(data));
@@ -862,6 +875,7 @@
             document.getElementById('studentNameExam').value = savedData.name || '';
             document.getElementById('studentNumberExam').value = savedData.number || '';
             document.getElementById('division').value = savedData.division || '30';
+            document.getElementById('exam-division').value = savedData.division || '30';
 
             Object.entries(savedData.coefficients || {}).forEach(([subject, value]) => {
                 document.querySelectorAll(`.coefficient-input[data-subject="${subject}"]`).forEach(input => {
@@ -884,9 +898,15 @@
 
             Object.entries(savedData.grades || {}).forEach(([subject, types]) => {
                 Object.entries(types).forEach(([type, value]) => {
-                    document.querySelectorAll(`.grade-input[data-subject="${subject}"][data-type="${type}"]`).forEach(input => {
-                        input.value = value;
-                    });
+                    const input = document.querySelector(`#annual-results .grade-input[data-subject="${subject}"][data-type="${type}"]`);
+                    if (input) input.value = value;
+                });
+            });
+
+            Object.entries(savedData.examGrades || {}).forEach(([subject, types]) => {
+                Object.entries(types).forEach(([type, value]) => {
+                    const input = document.querySelector(`#exam-results .grade-input[data-subject="${subject}"][data-type="${type}"]`);
+                    if (input) input.value = value;
                 });
             });
 
@@ -925,6 +945,12 @@
                 document.querySelector(`.subject-total[data-subject="${subject}"]`).textContent = subjectTotal.toFixed(2);
 
                 grandTotal += subjectTotal;
+
+                // Sync coefficients to exam tab
+                const examCoefficient = document.querySelector(`#exam-results .coefficient-input[data-subject="${subject}"]`);
+                if (examCoefficient) {
+                    examCoefficient.value = coefficient;
+                }
             });
 
             const division = parseFloat(document.getElementById('division').value) || 30;
@@ -932,22 +958,7 @@
 
             document.getElementById('total').textContent = grandTotal.toFixed(2);
             document.getElementById('average').textContent = average.toFixed(2);
-
-            // Sync exam inputs
-            subjects.forEach(subject => {
-                ['exam1', 'exam2', 'exam3'].forEach(type => {
-                    const annualInput = document.querySelector(`#annual-results .grade-input[data-subject="${subject}"][data-type="${type}"]`);
-                    const examInput = document.querySelector(`#exam-results .grade-input[data-subject="${subject}"][data-type="${type}"]`);
-                    if (annualInput && examInput) {
-                        examInput.value = annualInput.value;
-                    }
-                });
-                const annualCoefficient = document.querySelector(`#annual-results .coefficient-input[data-subject="${subject}"]`);
-                const examCoefficient = document.querySelector(`#exam-results .coefficient-input[data-subject="${subject}"]`);
-                if (annualCoefficient && examCoefficient) {
-                    examCoefficient.value = annualCoefficient.value;
-                }
-            });
+            document.getElementById('exam-division').value = division;
 
             calculateExamResults();
             saveData();
@@ -958,34 +969,27 @@
             const subjects = ['arabic', 'history', 'islamic', 'civics', 'philosophy', 'math', 'physics', 'science', 'english', 'french'];
 
             subjects.forEach(subject => {
-                const exam1 = parseFloat(document.querySelector(`#exam-results .grade-input[data-subject="${subject}"][data-type="exam1"]`).value) || 0;
-                const exam2 = parseFloat(document.querySelector(`#exam-results .grade-input[data-subject="${subject}"][data-type="exam2"]`).value) || 0;
-                const exam3 = parseFloat(document.querySelector(`#exam-results .grade-input[data-subject="${subject}"][data-type="exam3"]`).value) || 0;
+                const exam = parseFloat(document.querySelector(`#exam-results .grade-input[data-subject="${subject}"][data-type="exam"]`).value) || 0;
                 const coefficient = parseFloat(document.querySelector(`#exam-results .coefficient-input[data-subject="${subject}"]`).value) || 0;
 
-                const examResult = (exam1 * 1 + exam2 * 2 + exam3 * 3) / 6 * coefficient;
+                const examResult = exam * coefficient;
 
                 document.querySelector(`.exam-result[data-subject="${subject}"]`).textContent = examResult.toFixed(2);
                 examGrandTotal += examResult;
-            });
 
-            document.getElementById('exam-total').textContent = examGrandTotal.toFixed(2);
-
-            // Sync annual inputs
-            subjects.forEach(subject => {
-                ['exam1', 'exam2', 'exam3'].forEach(type => {
-                    const examInput = document.querySelector(`#exam-results .grade-input[data-subject="${subject}"][data-type="${type}"]`);
-                    const annualInput = document.querySelector(`#annual-results .grade-input[data-subject="${subject}"][data-type="${type}"]`);
-                    if (examInput && annualInput) {
-                        annualInput.value = examInput.value;
-                    }
-                });
-                const examCoefficient = document.querySelector(`#exam-results .coefficient-input[data-subject="${subject}"]`);
+                // Sync coefficients to annual tab
                 const annualCoefficient = document.querySelector(`#annual-results .coefficient-input[data-subject="${subject}"]`);
-                if (examCoefficient && annualCoefficient) {
-                    annualCoefficient.value = examCoefficient.value;
+                if (annualCoefficient) {
+                    annualCoefficient.value = coefficient;
                 }
             });
+
+            const examDivision = parseFloat(document.getElementById('exam-division').value) || 30;
+            const examAverage = examGrandTotal / examDivision;
+
+            document.getElementById('exam-total').textContent = examGrandTotal.toFixed(2);
+            document.getElementById('exam-average').textContent = examAverage.toFixed(2);
+            document.getElementById('division').value = examDivision;
 
             saveData();
         }
